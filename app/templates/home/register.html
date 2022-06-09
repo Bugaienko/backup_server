@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<h2>Регистрация</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ customer_form.as_p }}
+
+    <p><input type="submit" value="Save changes"></p>
+</form>
+
+{% endblock content %}

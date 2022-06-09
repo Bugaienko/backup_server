@@ -1,0 +1,47 @@
+{% load home_tags static %}
+<div class="col-md-4 pull-md-8 sidebar sidebar-left">
+                <form class="form_search" action="javascript:void(0)" method="post">
+                    <input class="form-control mr-sm-2" type="text" required="" placeholder="Search">
+                    <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                <h4>Categories</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="blog-singlepost-left-sidebar.html"><i class="fa fa-dot-circle-o"></i>Conditioner
+                            <span
+                                    class="badge">(6)</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="blog-singlepost-left-sidebar.html"><i class="fa fa-dot-circle-o"></i>Hair Care for
+                            Men
+                            <span class="badge">(6)</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="blog-singlepost-left-sidebar.html"><i class="fa fa-dot-circle-o"></i>Hair Color
+                            <span
+                                    class="badge">(6)</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="blog-singlepost-left-sidebar.html"><i class="fa fa-dot-circle-o"></i>Makeup &
+                            Cosmetics
+                            <span class="badge">(6)</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="blog-singlepost-left-sidebar.html"><i class="fa fa-dot-circle-o"></i>Shampo <span
+                                class="badge">(6)</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="blog-singlepost-left-sidebar.html"><i class="fa fa-dot-circle-o"></i>Styling
+                            Products
+                            <span class="badge">(6)</span></a>
+                    </li>
+                </ul>
+<!--                Лучшие процедуры таг-->
+                <div class="row sidebar_border">
+                    {% get_best_procedures count=3 %}
+                </div>
+<!--                Облако тэгов-->
+                <div class="row sidebar_border">
+                    {% get_tags_cloud %}
+                </div>
+            </div>

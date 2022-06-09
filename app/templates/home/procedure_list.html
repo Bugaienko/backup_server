@@ -1,0 +1,88 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<section class="home-service tab bg-sand">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2 col-xs-12 text-center">
+                <div class="sectionTitle">
+                    <span class="h4">Наши услуги</span>
+                    <h2>Лучшие предложения для Вас</h2>
+                </div>
+            </div>
+        </div>
+        <!-- Tabs row starts here -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs icon_tabs nav-justified" role="tablist">
+                    {% for p in procedure_list %}
+                        <li class="nav-item text-center">
+                            {% if p.id == 1 %}
+                            <a class="nav-link active" href="#tab{{ p.id }}" role="tab" data-toggle="tab">
+                            {% else %}
+                                <a class="nav-link" href="#tab{{ p.id }}" role="tab" data-toggle="tab">
+                            {% endif %}
+
+                            <i class="fa {{ p.icon }}"></i>
+                            <h3>{{ p.title }}</h3>
+                        </a>
+                    </li>
+                    {% endfor %}
+
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    {% for p in procedure_list %}
+                    {% if p.id == 1 %}
+                    <div role="tabpanel" class="tab-pane fade show active" id="tab{{ p.id }}">
+                    {% else %}
+                    <div role="tabpanel" class="tab-pane fade" id="tab{{ p.id }}">
+                    {% endif %}
+
+                        <div class="row tab-content">
+                            <div class="col-xs-5 col-md-5 push-md-7">
+                                <div class="service_image">
+                                    <img src="{{ p.image.url }}" alt="image">
+                                </div>
+                            </div>
+                            <div class="col-xs-7 col-md-7 pull-md-5">
+                                <div class="tab-content_left">
+                                    <h3>{{ p.title }}</h3>
+                                    <p>
+                                        {{ p.about|safe }}
+                                    </p>
+                                    <ul class="styled_list">
+                                        <li class=""><a href="#"><i class="fa fa-circle-o"></i> Fringilla dolor
+                                            ullamcorper.</a></li>
+                                        <li class=""><a href="#"><i class="fa fa-circle-o"></i> Dolor ullamcorp
+                                            faucibu.</a></li>
+                                        <li class=""><a href="#"><i class="fa fa-circle-o"></i> Tempus velit
+                                            venenatis.</a></li>
+                                        <li class=""><a href="#"><i class="fa fa-circle-o"></i> Magna laoreet augue
+                                            interdum.</a></li>
+                                        <li class=""><a href="#"><i class="fa fa-circle-o"></i> Laoreet augue
+                                            interdum et.</a></li>
+                                        <li class=""><a href="#"><i class="fa fa-circle-o"></i> Posuere magna mollis
+                                            lectus.</a></li>
+                                    </ul>
+                                    <a href="{{ p.get_absolute_url }}" class="btn btn-primary btn-default">Детали</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </div><!-- Tabs row starts here -->
+    </div>
+</section>
+
+
+
+{% endblock content %}
+

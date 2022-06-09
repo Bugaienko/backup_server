@@ -1,0 +1,11 @@
+<h4 class="text-center">Облако тэгов</h4>
+<div class="row">
+
+    <div class="col-12 tags_">
+
+        {% for tag in tags %}
+        <a class="btn btn-primary btn-rounded btn-sm btn-tag" href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
+        {% endfor %}
+
+    </div>
+</div>

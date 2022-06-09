@@ -1,0 +1,147 @@
+{% extends 'layouts/base.html' %}
+{% load home_tags static %}
+
+{% block slider %}
+
+{% endblock slider %}
+
+{% block content %}
+<section class="post-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 order-md-4">
+                <!-- Post card sytarts -->
+                <div class="card blog-card">
+                    <div class="card_img">
+                        <img class="img-full" src={{ procedure.image.url }} alt="Card image">
+                    </div>
+                    <div class="card-body">
+                        <span class="circle">{{ procedure.price }}</span>
+                        <h2 class="card-title col-md-6 push-md-3">{{ procedure.title }}</h2>
+                        <span>by <span><a href="" class="text-primary">Admin</a> </span></span> | <span><a href="">0  Comts</a></span>
+                        <p>
+                            {{ procedure.about|safe }}
+                        </p>
+                        <p>
+                            {{ active_tab }}<br>
+                            Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+                            veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
+                            quia voluptas sit aspenatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
+                            ratione voluptatem sequi nesciunt neque porro quisquam est.
+                        </p>
+                        <p class="tag">
+                            Tags:
+                            {% for tag in procedure.tags.all %}
+                            <a href="{{ tag.get_absolute_url }}" class="btn btn-info-outlined btn-sm btn-rounded">
+                                {{ tag.title }} </a>
+                            {% endfor %}
+                        </p>
+                        <div class="social_links">
+                            <a href="#" class="btn btn-social outlined facebook">
+                                <i class="fa fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="btn btn-social outlined twitter">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a href="#" class="btn btn-social outlined telegram">
+                                <i class="fa fa-telegram"></i>
+                            </a>
+                            <a href="#" class="btn btn-social outlined skype">
+                                <i class="fa fa-skype"></i>
+                            </a>
+                            <a href="#" class="btn btn-social outlined instagram">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <div class="image_container">
+
+                            {% for image in procedure.procedureimages_set.all %}
+                            <img class="image_circle img-procedure" src="{{ image.image.url }}"
+                                 alt="{{image.description}}">
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div><!-- Post card ends -->
+
+                <h3>Вопросы и ответы ({{procedure.questions_set.count}})</h3>
+                <div class="row"><!-- Comment starts -->
+                    <div class="col-12">
+                        {% for q in procedure.get_questions %}
+                        <div class="comment"><!-- single comments -->
+                            <div class="comment_img">
+                                <img src="{% static 'img/blog/user1.jpg' %}" alt="">
+                            </div>
+                            <div class="comment_title">
+                                <h5>{{ q.name }}</h5>
+                                <span><i class="fa fa-calendar" aria-hidden="true"></i> {{ q.date|date:'d.M' }} {{ q.date|time:'G:s' }}</span>
+                                <p>
+                                    {{ q.text }}
+                                </p>
+                                <a href="#formQuestion" onclick="addAnswer('{{ q.name }}', '{{ q.id }}')"
+                                   class="btn btn-secondary-outlined btn-mid">Ответить</a>
+                            </div>
+                            <!-- reply -->
+                            {% for an in q.questions_set.all %}
+                            <div class="reply">
+                                <div class="review-details">
+                                    <blockquote class="blockquote blockquote-bubble bg-white">
+                                        <p class="mb-0 blockquote-bubble-content">“ {{ q.text|slice:':50' }}... ”</p>
+                                    </blockquote>
+                                    <div class="blockquote-footer">
+                                        <img src="{% static 'img/profile/client.png' %}" alt="" class="img-circle mr-1">
+                                        <div class="info">
+                                            <span class="name">{{ an.name }}</span>&nbsp;
+                                            <span><i class="fa fa-calendar" aria-hidden="true"></i>  {{ an.date|date:'d.M' }} {{ an.date|time:'G:s' }}</span>
+                                            <br>
+                                            <span class="designation">{{ an.text }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endfor %}
+
+
+                    </div><!-- Comment ends -->
+                    <!-- Leave Comment -->
+                    <form action="{% url 'add_question' procedure.id %}" method="post" class="comment_box"
+                          id="formQuestion">
+                        {% csrf_token %}
+                        <input type="hidden" name="parent" id="contactparent" value="">
+                        <h3>Задать вопрос</h3>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                            <textarea class="form-control" name="text" id="exampleTextarea" rows="5"
+                                      placeholder="Задайте свой вопрос"></textarea>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="name" id="exampleInputName"
+                                       placeholder="Ваше имя">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="email" class="form-control" name="email" id="exampleInputEmail1"
+                                       placeholder="Email">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default btn-primary">Отправить</button>
+                    </form>
+                    <!-- Leave Comment ends -->
+                </div>
+            </div>
+        {% include 'layouts/sidebar.html' %}
+        </div>
+</section>
+<script>
+   function addAnswer(name, id) {
+        document.getElementById("contactparent").value = id;
+        document.getElementById("exampleTextarea").innerText = `${name}, `;
+   }
+
+
+
+</script>
+{% endblock content %}
+

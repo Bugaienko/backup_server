@@ -1,0 +1,17 @@
+<h4 class="text-center">Самые популярные</h4>
+<div class="row">
+    {% for p in best_procedures %}
+    <div class="col-11 best_post">
+        <a href="{{ p.get_absolute_url }}" class="recent-post">
+            <div class="post_img">
+                <img src="{{ p.image.url }}" width="100px" alt="">
+            </div>
+            <div class="post_title">
+                <h6>{{ p.title }}</h6>
+                <span><i class="fa fa-money" aria-hidden="true"></i> {{p.price}}</span>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+
+</div>

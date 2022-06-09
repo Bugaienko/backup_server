@@ -1,0 +1,46 @@
+{% extends 'layouts/base.html' %}
+{% load home_tags static %}
+
+{% block slider %}
+
+{% endblock slider %}
+
+{% block content %}
+<section class="post-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 order-md-4">
+                <div class="row text-center">
+                <button type="button" class="btn btn-success btn-block tag-btn">{{ tag.title }}</button>
+                    </div>
+
+                <div class="row">
+
+                    {% for p in tag.procedure_tags.all %}
+                    <div class="row procedure">
+                    <div class="col-md-4">
+                        <div >
+                            <a href=""><img class="proc_image" src="{{ p.image.url }}" alt="{{ p.title }}"></a>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="proc_body">
+                            <a href="{{ p.get_absolute_url }}"><h3 class="card-title">{{ p.title }}</h3></a>
+                            <p class="card-text">
+                                {{ p.about|safe }}
+                            </p>
+                            <a href="{{ p.get_absolute_url }}" class="btn btn-sm btn-primary down_btn">Подробнее</a>
+                        </div>
+                    </div>
+
+   </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+            {% include 'layouts/sidebar.html' %}
+
+
+        </div>
+</section>
+{% endblock content %}
