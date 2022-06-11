@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-+zz8yu^b+i9au$+bzekh!)@z@7y%e%ty624t_brp_#2*fg6&ac
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['185.174.175.116', 'localhost', '127.0.0.1']
+
+CSRF_TRUSTED_ORIGINS = ['https://www.serg-bug.info','http://www.serg-bug.info' ,'http://185.174.175.116' ,'https://185.174.175.116']
 
 
 # Application definition
@@ -158,6 +160,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # STATIC_DIR = BASE_DIR / 'static'
 # STATICFILES_DIRS = [STATIC_DIR]
+#STATIC_ROOT = '/home/sammy/massaga/app/static'
 STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
